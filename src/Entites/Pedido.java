@@ -58,6 +58,13 @@ public class Pedido {
         itensPedidos.remove(item);
     }
 
+    public void addProduto(Produto produto){
+        this.produto.add(produto);
+    }
+    public void removeProduto(Produto produto){
+        this.produto.remove(produto);
+    }
+
     public double total(){
         double soma  = 0;
         for (Item i: itensPedidos) {
@@ -74,7 +81,7 @@ public class Pedido {
         sb.append("Cliente: " + cliente.getNome());
         sb.append("("+sdf.format(cliente.getAniversario())+")");
         sb.append(" - " + cliente.getEmail() +"\n");
-        sb.append("Itens compraodos:\n ");
+        sb.append("Itens comprados:\n ");
         for (Item c: itensPedidos) {
             sb.append(c.getProduto().getNome() + ", ");
             sb.append(c.getProduto().getPreco() + ", ");

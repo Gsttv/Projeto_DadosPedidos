@@ -8,9 +8,7 @@ import Enums.Status;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
@@ -32,6 +30,9 @@ public class Main {
         System.out.println("STATUS: ");
         String status = sc.next();
         System.out.println("Quantos items para esse pedido: ");
+
+        pedido = new Pedido(new Date(), Status.valueOf(status.toUpperCase()), new Cliente(nome, email, niver));
+
         int qntItens = sc.nextInt();
         for (int i = 0; i < qntItens; i++) {
             System.out.println("Digite os dados do " + i + 1 + "° item");
@@ -42,13 +43,10 @@ public class Main {
             System.out.println("Quantidade");
             int qntPrduto = sc.nextInt();
 
-            pedido = new Pedido(new Date(), Status.valueOf(status.toUpperCase()), new Cliente(nome, email, niver));
-            produto = new Produto(nomeProduto, precoProduto);
-            item = new Item(qntPrduto, produto);
-            pedido.addItem(item);
+            pedido.addProduto(new Produto(nomeProduto,precoProduto));
+            pedido.addItem(new Item(qntPrduto,new Produto(nomeProduto,precoProduto)));
 
-
-        }
+            }
 
         System.out.println("SUMARIO");
         System.out.println(pedido);
