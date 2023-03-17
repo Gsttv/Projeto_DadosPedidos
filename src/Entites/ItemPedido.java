@@ -1,12 +1,12 @@
 package Entites;
 
-public class Item {
+public class ItemPedido {
     private Integer quantidade;
     private Produto produto;
 
-    public Item(){}
+    public ItemPedido(){}
 
-    public Item(Integer quantidade, Produto produto) {
+    public ItemPedido(Integer quantidade, Produto produto) {
         this.quantidade = quantidade;
         this.produto = produto;
     }

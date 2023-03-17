@@ -1,7 +1,7 @@
 package App;
 
 import Entites.Cliente;
-import Entites.Item;
+import Entites.ItemPedido;
 import Entites.Pedido;
 import Entites.Produto;
 import Enums.Status;
@@ -15,7 +15,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Pedido pedido = new Pedido();
-        Item item = new Item();
+        ItemPedido itemPedido = new ItemPedido();
         Produto produto = new Produto();
 
         System.out.println("Digite os dados d cliente");
@@ -35,7 +35,7 @@ public class Main {
 
         int qntItens = sc.nextInt();
         for (int i = 0; i < qntItens; i++) {
-            System.out.println("Digite os dados do " + i + 1 + "° item");
+            System.out.println("Digite os dados do " + (i + 1) + "° item");
             System.out.println("Nome");
             String nomeProduto = sc.next();
             System.out.println("Peço");
@@ -43,8 +43,7 @@ public class Main {
             System.out.println("Quantidade");
             int qntPrduto = sc.nextInt();
 
-            pedido.addProduto(new Produto(nomeProduto,precoProduto));
-            pedido.addItem(new Item(qntPrduto,new Produto(nomeProduto,precoProduto)));
+            pedido.addItem(new ItemPedido(qntPrduto,new Produto(nomeProduto,precoProduto)));
 
             }
 

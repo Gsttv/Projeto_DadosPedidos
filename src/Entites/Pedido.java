@@ -10,13 +10,14 @@ import java.util.List;
 public class Pedido {
     private Date momento;
     private Status status;
-    private List<Item> itensPedidos = new ArrayList<Item>();
+    private List<ItemPedido> itensPedidos = new ArrayList<ItemPedido>();
     private Cliente cliente;
-    private List<Produto> produto = new ArrayList<Produto>();
+
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-    public Pedido(){
+    public Pedido() {
 
     }
 
@@ -51,23 +52,18 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public void addItem(Item item){
-        itensPedidos.add(item);
-    }
-    public void removeItem(Item item){
-        itensPedidos.remove(item);
+    public void addItem(ItemPedido itemPedido) {
+        itensPedidos.add(itemPedido);
     }
 
-    public void addProduto(Produto produto){
-        this.produto.add(produto);
-    }
-    public void removeProduto(Produto produto){
-        this.produto.remove(produto);
+    public void removeItem(ItemPedido itemPedido) {
+        itensPedidos.remove(itemPedido);
     }
 
-    public double total(){
-        double soma  = 0;
-        for (Item i: itensPedidos) {
+
+    public double total() {
+        double soma = 0;
+        for (ItemPedido i : itensPedidos) {
             soma += i.subTotal();
         }
         return soma;
@@ -76,19 +72,19 @@ public class Pedido {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Instante do pedido: " + momento + "\n");
+        sb.append("Instante do pedido: " + sdf2.format(momento) + "\n");
         sb.append("Status do pedido: " + status + "\n");
         sb.append("Cliente: " + cliente.getNome());
-        sb.append("("+sdf.format(cliente.getAniversario())+")");
-        sb.append(" - " + cliente.getEmail() +"\n");
-        sb.append("Itens comprados:\n ");
-        for (Item c: itensPedidos) {
+        sb.append("(" + sdf.format(cliente.getAniversario()) + ")");
+        sb.append(" - " + cliente.getEmail() + "\n");
+        sb.append("Itens comprados:\n");
+        for (ItemPedido c : itensPedidos) {
             sb.append(c.getProduto().getNome() + ", ");
-            sb.append(c.getProduto().getPreco() + ", ");
+            sb.append("R$"+c.getProduto().getPreco() + ", ");
             sb.append("Quantidade: " + c.getQuantidade() + ", ");
             sb.append("Subtotal: " + "R$" + c.subTotal() + "\n");
         }
-        sb.append(total());
+        sb.append("Valor total do peddido: R$"+total());
         return sb.toString();
 
     }
